@@ -1,9 +1,9 @@
 ## WxRequest - 发送请求
 
-**插件介绍**
+## 插件介绍
 该插件是基于 Promise 封装 wx.request 请求方法，同时支持自定义请求的配置、拦截请求和响应、转换请求和响应数据、自动转换 JSON 数据等等功能。
 
-**参数说明**
+## 参数说明
 | 参数 | 类型 | 描述 |
 | --- | --- | --- |
 | options | <code>object</code> | 配置项 |
@@ -14,7 +14,7 @@
 | options.transformResponse | <code>array</code> | 转换响应数据 |
 | options.validateStatus | <code>function</code> | 基于响应状态返回成功或失败 |
 
-**使用说明**
+## 使用说明
 ```js
 // 使用自定义配置创建一个实例对象
 this.WxRequest = new WxRequest({

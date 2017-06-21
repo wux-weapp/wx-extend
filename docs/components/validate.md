@@ -1,15 +1,15 @@
 ## WxValidate - 表单验证
 
-**插件介绍**
+## 插件介绍
 该插件是参考 jQuery Validate 封装的，为小程序表单提供了一套常用的验证规则，包括手机号码、电子邮件验证等等，同时提供了添加自定义校验方法，让表单验证变得更简单。
 
-**参数说明**
+## 参数说明
 | 参数 | 类型 | 描述 |
 | --- | --- | --- |
 | rules | <code>object</code> | 验证字段的规则 |
 | messages | <code>object</code> | 验证字段的提示信息 |
 
-**内置校验规则**
+## 内置校验规则
 | 序号 | 规则 | 描述 |
 | --- | --- | --- |
 | 1 | <code>required: true</code> | 这是必填字段。 |
@@ -30,7 +30,7 @@
 | 16 | <code>max: 10</code> | 请输入不大于 10 的数值。 |
 | 17 | <code>range: [5, 10]</code> | 请输入范围在 5 到 10 之间的数值。 |
 
-**常用实例方法**
+## 常用实例方法
 | 名称 | 返回类型 | 描述 |
 | --- | --- | --- |
 | checkForm(e) | <code>boolean</code> | 验证所有字段的规则，返回验证是否通过。 |
@@ -39,12 +39,12 @@
 | validationErrors() | <code>array</code> | 返回所有错误信息。 |
 | addMethod(name, method, message) | <code>boolean</code> | 添加自定义验证方法。 |
 
-**addMethod(name, method, message) - 添加自定义校验**
+## addMethod(name, method, message) - 添加自定义校验
 第一个参数 name 是添加的方法的名字。
 第二个参数 method 是一个函数，接收三个参数 (value, param) ，value 是元素的值，param 是参数。
 第三个参数 message 是自定义的错误提示。
 
-**使用说明**
+## 使用说明
 ```js
 // 验证字段的规则
 const rules = {

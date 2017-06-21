@@ -1,9 +1,9 @@
 ## WxService - Promise API
 
-**插件介绍**
+## 插件介绍
 该插件是通过遍历 wx 方法对象，判断是否为异步方法，是则构造 Promise，同步方法不变，同时重写导航 API，包括 navigateTo、redirectTo 等等，使用时直接传参无需拼接路径。
 
-**使用说明**
+## 使用说明
 ```js
 // 创建实例对象
 this.WxService = new WxService
