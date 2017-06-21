@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/request/index",
+    "pages/service/index",
+    "pages/validate/index",
+    "pages/about/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#f7f7f8",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Wux",
+    "backgroundColor": "#efeff4",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#888888",
+    "selectedColor": "#04BE02",
+    "borderStyle": "white",
+    "backgroundColor": "#f7f7f8",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "assets/images/iconfont-demo.png",
+      "selectedIconPath": "assets/images/iconfont-demo-active.png",
+      "text": "Demo"
+    }, {
+      "pagePath": "pages/about/index",
+      "iconPath": "assets/images/iconfont-about.png",
+      "selectedIconPath": "assets/images/iconfont-about-active.png",
+      "text": "About"
+    }]
+  },
+  "debug": true
+}

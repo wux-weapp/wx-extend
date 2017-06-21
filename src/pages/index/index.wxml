@@ -1,0 +1,12 @@
+<view class="page-content">
+	<view class="page-body">
+		<view class="weui-cells weui-cells_after-title">
+			<block wx:for="{{ components }}" wx:key="">
+			    <navigator url="{{ item.url }}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+			        <view class="weui-cell__bd">{{ item.title }}</view>
+			        <view class="weui-cell__ft weui-cell__ft_in-access">{{ item.remark }}</view>
+			    </navigator>
+		    </block>
+		</view>
+	</view>
+</view>

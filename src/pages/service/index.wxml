@@ -1,0 +1,15 @@
+<import src="../common/head.wxml"/>
+
+<view class="page">
+    <template is="head" data="{{ ...component }}"/>
+    <view class="page__bd">
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="default" bindtap="showToast">showToast</button>
+            <button class="weui-btn" type="default" bindtap="hideToast">hideToast</button>
+            <button class="weui-btn" type="default" bindtap="showLoading">showLoading</button>
+            <button class="weui-btn" type="default" bindtap="hideLoading">hideLoading</button>
+            <button class="weui-btn" type="default" bindtap="showModal">showModal</button>
+            <button class="weui-btn" type="default" bindtap="showActionSheet">showActionSheet</button>
+        </view>
+    </view>
+</view>

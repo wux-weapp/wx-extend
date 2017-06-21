@@ -1,0 +1,7 @@
+<template name="head">
+    <view class="page__hd">
+        <view class="page__title">{{ title }}</view>
+        <view class="page__desc">{{ remark }}</view>
+        <view class="page__desc">{{ content }}</view>
+    </view>
+</template>
