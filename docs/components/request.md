@@ -97,6 +97,7 @@ this.WxRequest = new WxRequest({
 })
 
 // 请求时的配置
+// 最终请求路径为 https://api.example.com/user
 this.WxRequest.getRequest('/user', {
     baseURL: 'https://api.example.com/',
 })
@@ -134,7 +135,7 @@ this
 
 // 如果你想在稍后移除拦截器
 this.interceptors = this.WxRequest.interceptors.use(obj)
-this.WxRequest.interceptors.use(this.interceptors)
+this.WxRequest.interceptors.eject(this.interceptors)
 ```
 
 ```js
@@ -172,10 +173,12 @@ class Service extends WxRequest {
 	}
 }
 
+// 创建实例对象
 this.WxRequest = new Service({
     baseURL: 'https://example.com/api/',
 })
 
+// 对象上的方法
 this.WxRequest.create(parmas)
 this.WxRequest.update(parmas)
 this.WxRequest.retrieve(parmas)

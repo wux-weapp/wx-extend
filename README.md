@@ -2,9 +2,9 @@
 
 ## 插件及文档
 
-* [Request - 发送请求](docs/components/request.md)
-* [Service - Promise API](docs/components/service.md)
-* [Validate - 表单验证](docs/components/validate.md)
+* [WxRequest - 发送请求](docs/components/request.md)
+* [WxService - Promise API](docs/components/service.md)
+* [WxValidate - 表单验证](docs/components/validate.md)
 
 ## 更新日志
 

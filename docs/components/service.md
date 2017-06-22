@@ -33,7 +33,8 @@ this
     .then(data => console.log(data))
     .catch(err => console.log(err))
 
-// 重写导航 API
+// 重写导航 API，url 是页面的路径，params 是参数
+// example: navigateTo('pages/user/index', {id: 1})
 this.WxService.navigateTo(url, params)
 this.WxService.redirectTo(url, params)
 this.WxService.switchTab(url)

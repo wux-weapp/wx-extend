@@ -91,4 +91,17 @@ assistance: {
     required: true,
     assistance: true,
 },
+
+// 调用验证方法，传入参数 e 是 form 表单组件中的数据
+submitForm(e) {
+    const params = e.detail.value
+
+    console.log(params)
+
+    // 传入表单数据，调用验证方法
+    if (!this.WxValidate.checkForm(e)) {
+        const error = this.WxValidate.errorList[0]
+        return false
+    }
+},
 ```
