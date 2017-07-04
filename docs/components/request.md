@@ -67,15 +67,14 @@ this.WxRequest.all(promises)
 
     // `transformRequest` 允许在向服务器发送前，转换请求数据
     transformRequest: [
-        request => {
-            return request
+        (data, header) => {
+            return data
         },
     ],
 
     // `transformResponse` 转换响应数据
     transformResponse: [
-        response => {
-            let data = response.data
+        (data, header) => {
             if (typeof data === 'string') {
                 try {
                     data = JSON.parse(data)
@@ -119,7 +118,7 @@ this
         // 请求失败
         requestError(requestError) {
             wx.hideLoading()
-            return requestError
+            return Promise.reject(requestError)
         },
         // 响应数据
         response(response) {
@@ -129,7 +128,7 @@ this
         // 响应失败
         responseError(responseError) {
             wx.hideLoading()
-            return responseError
+            return Promise.reject(responseError)
         },
     })
 

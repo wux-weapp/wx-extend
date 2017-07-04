@@ -26,7 +26,7 @@ Page({
                 },
                 requestError(requestError) {
                     wx.hideLoading()
-                    return requestError
+                    return Promise.reject(requestError)
                 },
                 response(response) {
                     wx.hideLoading()
@@ -34,7 +34,7 @@ Page({
                 },
                 responseError(responseError) {
                     wx.hideLoading()
-                    return responseError
+                    return Promise.reject(responseError)
                 },
             })
     },
@@ -42,10 +42,10 @@ Page({
         this
             .WxRequest
             .getRequest('/users/skyvow/repos')
-            .then(data => {
-                console.log(data)
+            .then(res => {
+                console.log(res)
                 this.setData({
-                    items: data.sort((a, b) => b.stargazers_count - a.stargazers_count),
+                    items: res.data.sort((a, b) => b.stargazers_count - a.stargazers_count),
                 })
             })
     },

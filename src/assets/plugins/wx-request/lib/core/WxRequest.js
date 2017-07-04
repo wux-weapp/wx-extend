@@ -41,14 +41,14 @@ class WxRequest {
                 return request
             },
             requestError(requestError) {
-                return requestError
+                return Promise.reject(requestError)
             },
             response(response) {
                 response.responseTimestamp = new Date().getTime()
                 return response
             },
             responseError(responseError) {
-                return responseError
+                return Promise.reject(responseError)
             },
         })
     }
@@ -69,14 +69,13 @@ class WxRequest {
             },
             // 转换请求数据
             transformRequest: [
-                request => {
-                    return request
+                (data, header) => {
+                    return data
                 },
             ],
             // 转换响应数据
             transformResponse: [
-                response => {
-                    let data = response.data
+                (data, header) => {
                     if (typeof data === 'string') {
                         try {
                             data = JSON.parse(data)
@@ -154,9 +153,10 @@ class WxRequest {
         // 合并参数
         const defaults = Object.assign({
             method: 'GET',
+            dataType: 'json',
         }, this.defaults, config)
 
-        const { baseURL, header, transformRequest, transformResponse, validateStatus } = defaults
+        const { baseURL, header, validateStatus } = defaults
 
         // 配置请求参数
         const $$config = {
@@ -188,16 +188,32 @@ class WxRequest {
         }
 
         // 转换数据
-        const transformData = (res, fns) => {
+        const transformData = (data, header, status, fns) => {
             fns.forEach(fn => {
-                res = fn(res)
+                data = fn(data, header, status)
             })
-            return res
+            return data
+        }
+
+        // 转换响应数据
+        const transformResponse = res => {
+            const __res = Object.assign({}, res, {
+                data: transformData(res.data, res.header, res.statusCode, defaults.transformResponse),
+            })
+            return validateStatus(res.statusCode) ? __res : Promise.reject(__res)
+        }
+
+        // 发起HTTPS请求
+        const serverRequest = config => {
+            const __config = Object.assign({}, config, {
+                data: transformData($$config.data, $$config.header, undefined, defaults.transformRequest),
+            })
+            return this.__http(__config).then(transformResponse, transformResponse)
         }
 
         let requestInterceptors = []
         let responseInterceptors = []
-        let promise = this.__resolve(transformData($$config, transformRequest))
+        let promise = Promise.resolve($$config)
 
         // 缓存拦截器
         this.interceptors.forEach(n => {
@@ -213,19 +229,10 @@ class WxRequest {
         promise = chainInterceptors(promise, requestInterceptors)
 
         // 发起HTTPS请求
-        promise = promise.then(this.__http)
+        promise = promise.then(serverRequest)
 
         // 注入响应拦截器
         promise = chainInterceptors(promise, responseInterceptors)
-
-        // 接口调用成功
-        promise = promise.then(res => {
-            if (!res.statusCode || validateStatus(res.statusCode)) {
-                return transformData(res, transformResponse)
-            }
-            const error = new Error(`Request failed with status code ${res.statusCode}`)
-            return this.__reject(error)
-        }, err => err)
 
         return promise
     }
@@ -238,24 +245,6 @@ class WxRequest {
             obj.success = (res) => resolve(res)
             obj.fail = (res) => reject(res)
             wx.request(obj)
-        })
-    }
-
-    /**
-     * __resolve
-     */
-    __resolve(res) {
-        return new Promise((resolve, reject) => {
-            resolve(res)
-        })
-    }
-
-    /**
-     * __reject
-     */
-    __reject(res) {
-        return new Promise((resolve, reject) => {
-            reject(res)
         })
     }
 }
