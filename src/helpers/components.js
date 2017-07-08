@@ -16,4 +16,10 @@ export default [{
         remark: '表单验证',
         content: '该插件是参考 jQuery Validate 封装的，为小程序表单提供了一套常用的验证规则，包括手机号码、电子邮件验证等等，同时提供了添加自定义校验方法，让表单验证变得更简单。',
     },
+    {
+        title: 'WxResource',
+        url: '/pages/resource/index',
+        remark: 'Restful API',
+        content: '该插件是参考 angular-resource 封装的，基于 Promise 封装 wx.request 请求方法，提供 Restful API 服务方便进行数据交互。',
+    },
 ]
