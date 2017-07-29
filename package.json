@@ -1,6 +1,6 @@
 {
   "name": "wx-extend",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "微信小程序 - 扩展插件",
   "main": "./src/app.js",
   "dependencies": {},
