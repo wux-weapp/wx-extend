@@ -53,7 +53,7 @@ class WxValidate {
                 rangelength: this.formatTpl('请输入长度在 {0} 到 {1} 之间的字符。'),
                 min: this.formatTpl('请输入不小于 {0} 的数值。'),
                 max: this.formatTpl('请输入不大于 {0} 的数值。'),
-                range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值。'),
+                range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值。')
             }
         }
     }
@@ -174,6 +174,12 @@ class WxValidate {
             range(value, param) {
                 return that.optional(value) || (value >= param[0] && value <= param[1])
             },
+            /**
+			 *使用正则，param 传入正则表达式
+			 */
+			pattern(value,param){
+				return that.optional(value) || param.test(value);
+			}
         }
     }
 
