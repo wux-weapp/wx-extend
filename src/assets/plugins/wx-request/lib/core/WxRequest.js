@@ -146,8 +146,8 @@ class WxRequest {
         // 判断参数类型，如果第一个参数为字符串则赋值于 url，第二个参数为 config 配置
         if (typeof config === 'string') {
             config = Object.assign({}, {
-                url: arguments[1]
-            }, arguments[2])
+                url: arguments[0]
+            }, arguments[1])
         }
 
         // 合并参数
