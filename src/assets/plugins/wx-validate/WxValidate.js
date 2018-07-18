@@ -384,7 +384,7 @@ class WxValidate {
      */
     checkForm(data) {
         this.__initData()
-        console.log('1111', this.rules)
+
         for (let param in this.rules) {
             this.setView(param)
             this.checkParam(param, this.rules[param], data)
