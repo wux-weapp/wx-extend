@@ -68,7 +68,7 @@ Page({
         console.log(params)
 
         // 传入表单数据，调用验证方法
-        if (!this.WxValidate.checkForm(e)) {
+        if (!this.WxValidate.checkForm(params)) {
             const error = this.WxValidate.errorList[0]
             this.showModal(error)
             return false

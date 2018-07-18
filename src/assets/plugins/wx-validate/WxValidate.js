@@ -7,10 +7,8 @@
  */
 class WxValidate {
     constructor(rules = {}, messages = {}) {
-        Object.assign({
-            ...this,
-            _data: {},
-        }, {
+        Object.assign(this, {
+            data: {},
             rules,
             messages,
         })
@@ -133,7 +131,7 @@ class WxValidate {
              * 验证两个输入框的内容是否相同
              */
             equalTo(value, param) {
-                return that.optional(value) || value === that._data[param];
+                return that.optional(value) || value === that.data[param]
             },
             /**
              * 验证是否包含某个值
@@ -312,7 +310,10 @@ class WxValidate {
      */
     checkParam(param, rules, data) {
 
-        this._data = data;
+        // 缓存数据对象
+        this.data = data
+
+        // 缓存字段对应的值
         const value = data[param] !== null && data[param] !== undefined ? data[param] : ''
 
         // 遍历某个指定字段的所有规则，依次验证规则，否则缓存错误信息
@@ -383,7 +384,7 @@ class WxValidate {
      */
     checkForm(data) {
         this.__initData()
-
+        console.log('1111', this.rules)
         for (let param in this.rules) {
             this.setView(param)
             this.checkParam(param, this.rules[param], data)
