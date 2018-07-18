@@ -7,7 +7,10 @@
  */
 class WxValidate {
     constructor(rules = {}, messages = {}) {
-        Object.assign(this, {
+        Object.assign({
+            ...this,
+            _data: {},
+        }, {
             rules,
             messages,
         })
@@ -130,7 +133,7 @@ class WxValidate {
              * 验证两个输入框的内容是否相同
              */
             equalTo(value, param) {
-                return that.optional(value) || value === that.scope.detail.value[param]
+                return that.optional(value) || value === that._data[param];
             },
             /**
              * 验证是否包含某个值
@@ -305,15 +308,11 @@ class WxValidate {
      * 验证某个指定字段的规则
      * @param {String} param 字段名
      * @param {Object} rules 规则
-     * @param {Object} event 表单数据对象
+     * @param {Object} data 需要验证的数据对象
      */
-    checkParam(param, rules, event) {
+    checkParam(param, rules, data) {
 
-        // 缓存表单数据对象
-        this.scope = event
-
-        // 缓存字段对应的值
-        const data = event.detail.value
+        this._data = data;
         const value = data[param] !== null && data[param] !== undefined ? data[param] : ''
 
         // 遍历某个指定字段的所有规则，依次验证规则，否则缓存错误信息
@@ -380,14 +379,14 @@ class WxValidate {
 
     /**
      * 验证所有字段的规则，返回验证是否通过
-     * @param {Object} event 表单数据对象
+     * @param {Object} data 需要验证数据对象
      */
-    checkForm(event) {
+    checkForm(data) {
         this.__initData()
 
         for (let param in this.rules) {
             this.setView(param)
-            this.checkParam(param, this.rules[param], event)
+            this.checkParam(param, this.rules[param], data)
         }
 
         return this.valid()
